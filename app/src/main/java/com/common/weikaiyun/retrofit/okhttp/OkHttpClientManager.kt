@@ -9,8 +9,6 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 object OkHttpClientManager {
-    var headerGenerator: HeaderGenerator? = null
-
     private val loggingInterceptor =  HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }

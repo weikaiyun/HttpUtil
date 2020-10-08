@@ -2,6 +2,7 @@ package com.common.weikaiyun.retrofit.okhttp
 
 import android.text.TextUtils
 import android.webkit.CookieManager
+import com.common.weikaiyun.retrofit.NetWorkManager
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -18,7 +19,7 @@ class CustomInterceptor: Interceptor {
             builder.header("Cookie", cookie)
         }
 
-        OkHttpClientManager.headerGenerator?.apply {
+        NetWorkManager.headerGenerator?.apply {
             val headers: List<CustomHeader> = generateHeaders()
             for ((name, value) in headers) {
                 builder.addHeader(name, value)
