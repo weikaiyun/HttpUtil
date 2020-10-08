@@ -20,7 +20,16 @@ object OkHttpClientManager {
 
     val okHttpClient = createOkHttpClient(CustomInterceptor(), loggingInterceptor)
 
-    private const val cookieStoreName = "httpCookies"
+    private val cookieManager = WebKitSyncCookieManager(
+        createCookieStore(name = "httpCookies", persistent = true),
+        CookiePolicy.ACCEPT_ALL
+    )
+
+    private fun createCookieStore(name: String, persistent: Boolean) = if (persistent) {
+        SharedPreferencesCookieStore(DemoApplication.context, name)
+    } else {
+        InMemoryCookieStore(name)
+    }
 
     private fun createOkHttpClient(
         vararg interceptors: Interceptor
@@ -49,15 +58,4 @@ object OkHttpClientManager {
 
         return builder.build()
     }
-
-    private fun createCookieStore(name: String, persistent: Boolean) = if (persistent) {
-        SharedPreferencesCookieStore(DemoApplication.context, name)
-    } else {
-        InMemoryCookieStore(name)
-    }
-
-    private val cookieManager = WebKitSyncCookieManager(
-    createCookieStore(name = cookieStoreName, persistent = true),
-    CookiePolicy.ACCEPT_ALL
-    )
 }
