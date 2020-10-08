@@ -6,7 +6,6 @@ import okhttp3.Interceptor
 import okhttp3.Response
 
 class CustomInterceptor: Interceptor {
-    //同webview使用同样的cookie
     private val cookieManager = CookieManager.getInstance()
 
     override fun intercept(chain: Interceptor.Chain): Response {
