@@ -1,6 +1,6 @@
 package com.common.weikaiyun.retrofit
 
-import com.common.weikaiyun.retrofit.okhttp.HeaderGenerator
+import com.common.weikaiyun.retrofit.header.HeaderGenerator
 import com.common.weikaiyun.retrofit.okhttp.OkHttpClientManager
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -3,6 +3,7 @@ package com.common.weikaiyun.retrofit.okhttp
 import android.text.TextUtils
 import android.webkit.CookieManager
 import com.common.weikaiyun.retrofit.NetWorkManager
+import com.common.weikaiyun.retrofit.header.CustomHeader
 import okhttp3.Interceptor
 import okhttp3.Response
 

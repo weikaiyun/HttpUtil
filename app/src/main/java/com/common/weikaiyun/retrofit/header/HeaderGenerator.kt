@@ -1,4 +1,4 @@
-package com.common.weikaiyun.retrofit.okhttp
+package com.common.weikaiyun.retrofit.header
 
 interface HeaderGenerator {
     fun generateHeaders(): List<CustomHeader>
