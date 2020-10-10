@@ -1,7 +1,6 @@
 package com.common.weikaiyun.retrofit.okhttp
 
 import com.common.weikaiyun.demo.DemoApplication
-import net.gotev.cookiestore.InMemoryCookieStore
 import net.gotev.cookiestore.SharedPreferencesCookieStore
 import net.gotev.cookiestore.WebKitSyncCookieManager
 import net.gotev.cookiestore.okhttp.JavaNetCookieJar
@@ -19,17 +18,6 @@ object OkHttpClientManager {
     }
 
     val okHttpClient = createOkHttpClient(CustomInterceptor(), loggingInterceptor)
-
-    private val cookieManager = WebKitSyncCookieManager(
-        createCookieStore(name = "httpCookies", persistent = true),
-        CookiePolicy.ACCEPT_ALL
-    )
-
-    private fun createCookieStore(name: String, persistent: Boolean) = if (persistent) {
-        SharedPreferencesCookieStore(DemoApplication.context, name)
-    } else {
-        InMemoryCookieStore(name)
-    }
 
     private fun createOkHttpClient(
         vararg interceptors: Interceptor
@@ -53,6 +41,11 @@ object OkHttpClientManager {
         //val sslParams = HttpsUtil.getSslSocketFactory(Array(1) { inputStream }, null, null)
         val sslParams = HttpsUtil.getSslSocketFactory()
         builder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
+
+        val cookieManager = WebKitSyncCookieManager(
+            SharedPreferencesCookieStore(DemoApplication.context, "httpCookies"),
+            CookiePolicy.ACCEPT_ALL
+        )
 
         builder.cookieJar(JavaNetCookieJar(cookieManager))
 

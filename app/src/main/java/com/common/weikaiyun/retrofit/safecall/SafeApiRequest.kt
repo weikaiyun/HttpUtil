@@ -14,7 +14,7 @@ abstract class SafeApiRequest {
                 return Result.Success(response.body()!!.data)
             }
 
-            val customException = ExceptionHandler.CustomException(response.body()!!.code, response.body()!!.message)
+            val customException = ExceptionHandler.CustomException(response.body()!!.errorCode, response.body()!!.errorMsg)
             return Result.Error(ExceptionHandler.handleException(customException))
 
         } catch (e: Exception) {

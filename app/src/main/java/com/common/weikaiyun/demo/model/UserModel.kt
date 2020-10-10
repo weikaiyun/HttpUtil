@@ -1,11 +1,27 @@
 package com.common.weikaiyun.demo.model
 
-import com.common.weikaiyun.demo.db.User
-import com.common.weikaiyun.demo.db.UserDatabase
+import com.common.weikaiyun.demo.model.network.DemoApis
+import com.common.weikaiyun.demo.model.network.bean.User
+import com.common.weikaiyun.retrofit.NetWorkManager
+import com.common.weikaiyun.retrofit.safecall.Result
 import com.common.weikaiyun.retrofit.safecall.SafeApiRequest
 
 class UserModel: SafeApiRequest() {
-    suspend fun insertAll(vararg users: User) = UserDatabase.getInstance().userDao().insertAll(*users)
+    suspend fun register(userName: String, password: String, rePassword: String): Result<User> {
+        return apiRequest {
+            NetWorkManager
+                .wanAndroidRetrofit
+                .create(DemoApis::class.java)
+                .register(userName, password, rePassword)
+        }
+    }
 
-    suspend fun updateAll(vararg users: User) = UserDatabase.getInstance().userDao().updateAll(*users)
+    suspend fun login(userName: String, password: String): Result<User> {
+        return apiRequest {
+            NetWorkManager
+                .wanAndroidRetrofit
+                .create(DemoApis::class.java)
+                .login(userName, password)
+        }
+    }
 }
