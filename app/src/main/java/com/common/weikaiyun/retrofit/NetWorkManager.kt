@@ -1,12 +1,12 @@
 package com.common.weikaiyun.retrofit
 
-import com.common.weikaiyun.retrofit.header.HeaderGenerator
+import com.common.weikaiyun.retrofit.header.CustomHeader
 import com.common.weikaiyun.retrofit.okhttp.OkHttpClientManager
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetWorkManager {
-    var headerGenerator: HeaderGenerator? = null
+    val commonHeaders = ArrayList<CustomHeader>()
     private val client = OkHttpClientManager.okHttpClient
 
     //此处可以使用多url，只要每次baseUrl不同即可
@@ -16,5 +16,7 @@ object NetWorkManager {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    val wanAndroidRetrofit = retrofit("https://www.wanandroid.com/")
+    val wanAndroidRetrofit by lazy {
+        retrofit("https://www.wanandroid.com/")
+    }
 }

@@ -11,11 +11,9 @@ class CustomInterceptor: Interceptor {
         val request = chain.request()
         val builder = request.newBuilder()
 
-        NetWorkManager.headerGenerator?.apply {
-            val headers: List<CustomHeader> = generateHeaders()
-            for ((name, value) in headers) {
-                builder.addHeader(name, value)
-            }
+        val headers: List<CustomHeader> = NetWorkManager.commonHeaders
+        for ((name, value) in headers) {
+            builder.addHeader(name, value)
         }
 
         val realRequest = builder.build()
