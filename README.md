@@ -1,4 +1,5 @@
 # HttpUtil
+请直接copy源码使用。
 
 ### LICENSE
 ```
